@@ -1,0 +1,572 @@
+<!DOCTYPE html>  
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Balsa</title>
+<meta name="description" content="Community Components Example">
+<script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+<!-- Este script es para redondear los bordes del vidrio del parabrisas stranger -->
+<script>
+AFRAME.registerComponent('rounded-glass', {
+
+    schema: {
+        width:   { type: 'number', default: 1.9 },
+        height:  { type: 'number', default: 1.1 },
+        radius:  { type: 'number', default: 0.15 },
+        color:   { type: 'color', default: '#36C5F5' },
+        opacity: { type: 'number', default: 0.35 }
+    },
+
+    init: function () {
+
+        const data = this.data;
+
+        const w = data.width;
+        const h = data.height;
+
+        const r = Math.min(
+            data.radius,
+            w / 2,
+            h / 2
+        );
+
+        // Crear la forma del vidrio
+        const shape = new THREE.Shape();
+
+        // Esquina inferior izquierda
+        shape.moveTo(-w / 2 + r, -h / 2);
+
+        // Parte inferior
+        shape.lineTo(w / 2 - r, -h / 2);
+
+        // Esquina inferior derecha
+        shape.quadraticCurveTo(
+            w / 2,
+            -h / 2,
+            w / 2,
+            -h / 2 + r
+        );
+
+        // Lateral derecho
+        shape.lineTo(w / 2, h / 2 - r);
+
+        // Esquina superior derecha
+        shape.quadraticCurveTo(
+            w / 2,
+            h / 2,
+            w / 2 - r,
+            h / 2
+        );
+
+        // Parte superior
+        shape.lineTo(-w / 2 + r, h / 2);
+
+        // Esquina superior izquierda
+        shape.quadraticCurveTo(
+            -w / 2,
+            h / 2,
+            -w / 2,
+            h / 2 - r
+        );
+
+        // Lateral izquierdo
+        shape.lineTo(-w / 2, -h / 2 + r);
+
+        // Esquina inferior izquierda
+        shape.quadraticCurveTo(
+            -w / 2,
+            -h / 2,
+            -w / 2 + r,
+            -h / 2
+        );
+
+        // Geometría del vidrio
+        const geometry = new THREE.ShapeGeometry(
+            shape,
+            24
+        );
+
+        // Material transparente
+        const material = new THREE.MeshBasicMaterial({
+
+            color: data.color,
+
+            transparent: true,
+
+            opacity: data.opacity,
+
+            side: THREE.DoubleSide,
+
+            depthWrite: false
+
+        });
+
+        // Crear la superficie
+        const vidrio = new THREE.Mesh(
+            geometry,
+            material
+        );
+
+        // Agregar el vidrio a la entidad
+        this.el.setObject3D(
+            'mesh',
+            vidrio
+        );
+
+    },
+
+    remove: function () {
+
+        this.el.removeObject3D('mesh');
+
+    }
+
+});
+</script>
+<!-- el script de abajo es para invocar CDN del particle system qué emula la lluvia STRANGER YEL QUÉ VIENE DESPUÉS ES LA LUNA Y EL SOL -->
+<script src="https://unpkg.com/@c-frame/aframe-particle-system-component@1.2.x/dist/aframe-particle-system-component.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.7.x/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+<a-scene device-orientation-permission-ui="enabled: true">
+    
+<a-entity id="rain" particle-system="preset: snow; color: #24CAFF; particleCount: 5000"></a-entity>
+
+
+<!-- BALSA: primer modelo -->
+<a-entity id="balsa" position="0 0.15 -5"
+          animation="property: position; easing: easeInOutQuad; dir: alternate; dur: 1000; to: 0 0.05 -5; loop: true">
+
+  <!-- Tronco central -->
+  <a-cylinder position="0 0 0"
+    radius="0.18" height="6.5"
+    rotation="0 90 90"
+    color="#80512E"></a-cylinder>
+    <a-cylinder position="2 0 0"
+    radius="0.18" height="6.5"
+    rotation="0 90 90"
+    color="#80512E"></a-cylinder>
+<a-cylinder position="-2 0 0"
+    radius="0.18" height="6.5"
+    rotation="0 90 90"
+    color="#80512E"></a-cylinder>
+     <!-- cabina -->
+     <!-- CABINA: suelo -->
+<a-box
+    id="sueloCabina"
+    position="0 0.3 0"
+    width="2.5"
+    height="0.12"
+    depth="2.5"
+    color="gray">
+</a-box>
+          <a-box
+    id="techoCabina"
+    position="0 1.91 0"
+    width="2.5"
+    height="0.12"
+    depth="2.5"
+    color="gray">
+</a-box>
+
+<!-- VENTANA FRONTAL DE LA CABINA -->
+
+<!-- Marco izquierdo -->
+<a-box
+    position="-1.1 1.1 -1.2"
+    width="0.3"
+    height="1.5"
+    depth="0.12"
+    color="#80512E">
+</a-box>
+
+<!-- Marco derecho -->
+<a-box
+    position="1.1 1.1 -1.2"
+    width="0.3"
+    height="1.5"
+    depth="0.12"
+    color="#80512E">
+</a-box>
+
+<!-- Marco inferior -->
+<a-box
+    position="0 0.6 -1.2"
+    width="1.9"
+    height="0.5"
+    depth="0.12"
+    color="#80512E">
+</a-box>
+
+<!-- Marco superior -->
+<a-box
+    position="0 1.75 -1.2"
+    width="1.9"
+    height="0.2"
+    depth="0.12"
+    color="#80512E">
+</a-box>
+
+<!-- PARABRISAS CON ESQUINAS REDONDEADAS -->
+<!-- VIDRIO FRONTAL CON ESQUINAS REDONDEADAS -->
+<a-entity
+    id="vidrioFrontal"
+    position="0 1.1 -1.205"
+    rounded-glass="
+        width: 1.9;
+        height: 1;
+        radius: 0.15;
+        color: #36C5F5;
+        opacity: 0.35">
+</a-entity>
+
+
+<!-- Bordes redondeados exteriores del marco -->
+<!-- <a-torus position="-0.8 1.5 -1.27"
+    radius="0.15" radius-tubular="0.009"
+    arc="90" rotation="0 0 90"
+    color="#80512E" ></a-torus>
+
+<a-torus position="0.8 1.5 -1.27"
+    radius="0.15" radius-tubular="0.009"
+    arc="90" rotation="0 0 0"
+    color="#80512E"></a-torus>
+
+<a-torus position="-0.8 1 -1.27"
+    radius="0.15" radius-tubular="0.009"
+    arc="90" rotation="0 0 180"
+    color="#80512E"></a-torus>
+
+<a-torus position="0.8 1 -1.27"
+    radius="0.15" radius-tubular="0.009"
+    arc="90" rotation="0 0 270"
+    color="#80512E"></a-torus> -->
+
+<!-- Vidrio frontal -->
+
+<!-- PARABRISAS: vidrio -->
+<!-- <a-box
+    id="vidrioFrontal"
+    position="0 1.1 -1.205"
+    width="1.9"
+    height="1.1"
+    depth="0.025"
+    material="color: #36C5F5; opacity: 0.35; transparent: true; side: double">
+</a-box> -->
+
+<!-- Esquinas redondeadas del marco -->
+<!-- <a-sphere position="-0.95 1.65 -1.27" radius="0.15" scale="1 1 0.35" color="#80512E"></a-sphere>
+<a-sphere position="0.95 1.65 -1.27" radius="0.15" scale="1 1 0.35" color="#80512E"></a-sphere>
+<a-sphere position="-0.95 0.55 -1.27" radius="0.15" scale="1 1 0.35" color="#80512E"></a-sphere>
+<a-sphere position="0.95 0.55 -1.27" radius="0.15" scale="1 1 0.35" color="#80512E"></a-sphere> -->
+
+<!-- CURVAS EXTERIORES DEL PARABRISAS -->
+
+<!-- LIMPIAPARABRISAS IZQUIERDO -->
+<a-entity id="limpiaparabrisasIzq" position="-0.8 1.6 -1.24">
+        <a-box position="0.35 0 0"
+        width="0.75" height="0.035" depth="0.025"
+        color="#222222"></a-box>
+</a-entity>
+
+<!-- LIMPIAPARABRISAS DERECHO -->
+<a-entity id="limpiaparabrisasDer" position="0.8 1.6 -1.24">
+    <a-box position="-0.35 0 0"
+        width="0.75" height="0.035" depth="0.025"
+       =" color="#222222"></a-box>
+</a-entity>
+
+<!-- BOTÓN" FÍSICO DENTRO DE LA CABINA -->
+<a-entity id="botonLimpia" class="boton-limpiaparabrisas"
+    position="0.75 0.65 -0.65"
+    rotation="0 0 0">
+    <a-cylinder radius="0.13" height="0.08"
+        rotation="90 0 0" color="#333333"></a-cylinder>
+    <a-cylinder position="0 0 -0.055"
+        radius="0.09" height="0.04"
+        rotation="90 0 0" color="#22CC66"></a-cylinder>
+        </a-entity>
+   <!--  <a-text value="LIMPIA"
+        position="0 0.2 0"
+        align="center" color="#FFFFFF"
+        width="1.2"></a-text>
+</a-entity>
+ -->
+<!-- <a-box
+    id="vidrioFrontal"
+    position="0 1.1 -1.2"
+    width="1.9"
+    height="1.1"
+    depth="0.025"
+    material="color: #36C5F5; opacity: 0.4; transparent: true; side: double">
+</a-box> -->
+<!-- Pared trasera -->
+<!-- <a-box
+    id="paredTrasera"
+    position="0 1.2 1.2"
+    width="2.5"
+    height="1.5"
+    depth="0.12"
+    color="#80512E">
+</a-box> -->
+<!-- CABINA: PARED TRASERA -->
+
+<!-- Laterales de la puerta trasera#80512E -->
+ <a-box position="-1.15 1.1 1.2"
+    width="0.2" height="1.5" depth="0.12"
+    color="#80512E"></a-box>
+
+<a-box position="1.15 1.1 1.2"
+    width="0.2" height="1.5" depth="0.12"
+    color="#80512E"></a-box> 
+
+<!-- Separaciones entre ventanas y puerta -->
+ <a-box position="-0.425 1.1 1.2"
+    width="0.15" height="1.5" depth="0.12"
+    color="#80512E"></a-box>
+
+<a-box position="0.425 1.1 1.2"
+    width="0.15" height="1.5" depth="0.12"
+    color="#80512E"></a-box>
+
+<!-- Parte inferior de las ventanas -->
+<a-box position="-0.775 0.65 1.2"
+    width="0.55" height="0.6" depth="0.12"
+    color="#80512E"></a-box>
+
+<a-box position="0.775 0.65 1.2"
+    width="0.55" height="0.6" depth="0.12"
+    color="#80512E"></a-box>
+
+<!-- Parte superior de las ventanas -->
+<a-box position="-0.775 1.65 1.2"
+    width="0.55" height="0.4" depth="0.12"
+    color="#80512E"></a-box>
+
+<a-box position="0.775 1.65 1.2"
+    width="0.55" height="0.4" depth="0.12"
+    color="#80512E"></a-box>
+
+<!-- Parte superior de la puerta -->
+<a-box position="0 1.775 1.2"
+    width="0.7" height="0.15" depth="0.12"
+    color="#80512E"></a-box>
+
+<!-- VIDRIOS -->
+ <a-box position="-0.775 1.2 1.2"
+    width="0.55" height="0.5" depth="0.025"
+    material="color: #36C5F5; opacity: 0.4; transparent: true"></a-box>
+
+<a-box position="0.775 1.2 1.2"
+    width="0.55" height="0.5" depth="0.025"
+    material="color: #36C5F5; opacity: 0.4; transparent: true"></a-box> 
+
+<!-- PUERTA -->
+<!-- <a-box id="puerta"
+    position="0 1.125 1.2"
+    width="0.66" height="1.3" depth="0.06"
+    color="#704626"></a-box> -->
+<!-- Pared izquierda -->
+<!-- <a-box
+    id="paredIzquierda"
+    position="-1.2 1.2 0"
+    width="0.12"
+    height="1.5"
+    O="2.5"
+    color="#966238">
+</a-box> -->
+
+<!-- Pared derecha -->
+<!-- <a-box
+    id="paredDerecha"
+    position="1.2 1.2 0"
+    width="0.12"
+    height="1.5"
+    depth="2.5"
+    color="#966238">
+</a-box>-->      -->
+    
+  <!-- Troncos laterales -->
+   <a-cylinder position="0 0.12 1.3"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="red"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -1.3"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="green"></a-cylinder>
+  <a-cylinder position="0 0.12 1.6"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="#966238"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -1.6"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="#966238"></a-cylinder>
+
+  <a-cylinder position="0 0.12 1.9"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="#704626"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -1.9"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="#704626"></a-cylinder>
+ <a-cylinder position="0 0.12 2.2"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="#966238"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -2.2"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="#966238"></a-cylinder>
+    <a-cylinder position="0 0.12 2.5"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="black"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -2.5"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="black"></a-cylinder>
+      <a-cylinder position="0 0.12 2.7"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="orange"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -2.7"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="orange"></a-cylinder>
+     <a-cylinder position="0 0.12 3"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="blue"></a-cylinder>
+
+  <a-cylinder position="0 0.12 -3"
+    radius="0.18" height="5"
+    rotation="0 0 90"
+    color="blue"></a-cylinder>
+</a-entity>
+
+
+<a-entity id="ocean" ocean="density: 20; width: 50; depth: 50; speed: 4"
+material="color: #9CE3F9; opacity: 0.75; metalness: 0; roughness: 1"
+rotation="-90 0 0"></a-entity>
+
+<a-simple-sun-sky sun-position="1 0.4 0"></a-simple-sun-sky>
+
+<a-entity id="light" light="type: ambient; color: #888"></a-entity>
+<!-- CÁMARA DESDE el agua -->
+<a-entity
+    id="camaraAerea"
+    position="0 -0.4 -4.5"
+    rotation="0 0 0">
+<!-- CÁMARA DESDE ARRIBA -->
+<!-- <a-entity
+    id="camaraAerea"
+    position="0 8 -3"
+    rotation="-90 0 0">  -->
+    <!-- <a-camera
+        wasd-controls-enabled="false"
+        look-controls-enabled="true">
+    </a-camera> -->
+     <a-camera
+            wasd-controls="enabled: true"
+            look-controls="
+                enabled: true;
+                magicWindowTrackingEnabled: true;
+                touchEnabled: true">
+                <!-- <a-entity
+    cursor="rayOrigin: mouse"
+    raycaster="objects: .boton-limpiaparabrisas">
+</a-entity> -->
+        </a-camera>
+</a-entity>
+</a-scene>
+<button id="btnLimpiaMovil">
+    🧹 LIMPIAPARABRISAS: OFF
+</button>
+
+<style>
+#btnLimpiaMovil {
+    position: fixed;
+    right: 15px;
+    bottom: 25px;
+    z-index: 9999;
+    padding: 16px;
+    border: 2px solid white;
+    border-radius: 15px;
+    background: #168B45;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const escena = document.querySelector('a-scene');
+
+    function iniciarLimpiaparabrisas() {
+
+        const boton = document.querySelector('#btnLimpiaMovil');
+        const izquierda = document.querySelector('#limpiaparabrisasIzq');
+        const derecha = document.querySelector('#limpiaparabrisasDer');
+
+        if (!boton || !izquierda || !derecha) {
+            console.error('No se encontraron los elementos del limpiaparabrisas');
+            return;
+        }
+
+        let activos = false;
+
+        boton.addEventListener('pointerdown', function (evento) {
+
+            evento.preventDefault();
+            activos = !activos;
+
+            if (activos) {
+
+                izquierda.setAttribute('animation__barrido',
+                    'property: rotation; from: 0 0 0; to: 0 0 -90; dur: 700; dir: alternate; loop: true; easing: easeInOutSine');
+
+                derecha.setAttribute('animation__barrido',
+                    'property: rotation; from: 0 0 0; to: 0 0 90; dur: 700; dir: alternate; loop: true; easing: easeInOutSine');
+
+                boton.textContent = '🧹 LIMPIAPARABRISAS: ON';
+                boton.style.background = '#B52B2B';
+
+            } else {
+
+                izquierda.removeAttribute('animation__barrido');
+                derecha.removeAttribute('animation__barrido');
+
+                izquierda.setAttribute('rotation', '0 0 0');
+                derecha.setAttribute('rotation', '0 0 0');
+
+                boton.textContent = '🧹 LIMPIAPARABRISAS: OFF';
+                boton.style.background = '#168B45';
+            }
+        });
+    }
+
+    if (escena.hasLoaded) {
+        iniciarLimpiaparabrisas();
+    } else {
+        escena.addEventListener('loaded', iniciarLimpiaparabrisas, { once: true });
+    }
+
+});
+</script>
+
+</body>
+</html>
