@@ -213,10 +213,10 @@ AFRAME.registerComponent('rounded-glass', {
 <!-- VIDRIO FRONTAL CON ESQUINAS REDONDEADAS -->
 <a-entity
     id="vidrioFrontal"
-    position="0 1.1 -1.205"
+    position="0 1.25 -1.205"
     rounded-glass="
-        width: 1.9;
-        height: 1;
+        width: 1.85;
+        height: 0.78;
         radius: 0.15;
         color: #36C5F5;
         opacity: 0.35">
@@ -224,8 +224,12 @@ AFRAME.registerComponent('rounded-glass', {
 
 
 <!-- Bordes redondeados exteriores del marco -->
-<!-- <a-torus position="-0.8 1.5 -1.27"
+<a-torus position="-0.8 1.5 -1.27"
     radius="0.15" radius-tubular="0.009"
+    arc="90" rotation="0 0 90"
+    color="#80512E" ></a-torus>
+   <a-torus position="-0.84 1.52 -1.27"
+    radius="0.14" radius-tubular="0.015"
     arc="90" rotation="0 0 90"
     color="#80512E" ></a-torus>
 
@@ -234,15 +238,32 @@ AFRAME.registerComponent('rounded-glass', {
     arc="90" rotation="0 0 0"
     color="#80512E"></a-torus>
 
+<a-torus position="0.84 1.52 -1.27"
+    radius="0.14" radius-tubular="0.015"
+    arc="90" rotation="0 0 0"
+    color="#80512E"></a-torus> 
+
 <a-torus position="-0.8 1 -1.27"
     radius="0.15" radius-tubular="0.009"
+    arc="90" rotation="0 0 180"
+    color="#80512E"></a-torus>
+
+<a-torus position="-0.84 0.96 -1.27"
+    radius="0.14" radius-tubular="0.015"
     arc="90" rotation="0 0 180"
     color="#80512E"></a-torus>
 
 <a-torus position="0.8 1 -1.27"
     radius="0.15" radius-tubular="0.009"
     arc="90" rotation="0 0 270"
-    color="#80512E"></a-torus> -->
+    color="#80512E"></a-torus>
+  
+ <a-torus position="0.84 0.96 -1.27"
+    radius="0.14" radius-tubular="0.015"
+    arc="90" rotation="0 0 270"
+    color="#80512E"></a-torus> 
+    
+
 
 <!-- Vidrio frontal -->
 
@@ -275,7 +296,7 @@ AFRAME.registerComponent('rounded-glass', {
 <a-entity id="limpiaparabrisasDer" position="0.8 1.6 -1.24">
     <a-box position="-0.35 0 0"
         width="0.75" height="0.035" depth="0.025"
-       =" color="#222222"></a-box>
+       " color="#222222"></a-box>
 </a-entity>
 
 <!-- BOTÓN" FÍSICO DENTRO DE LA CABINA -->
@@ -379,15 +400,95 @@ AFRAME.registerComponent('rounded-glass', {
 </a-box> -->
 
 <!-- Pared derecha -->
-<!-- <a-box
-    id="paredDerecha"
-    position="1.2 1.2 0"
-    width="0.12"
-    height="1.5"
-    depth="2.5"
+ <a-box
+    id="paredDerecha1"
+    position="1.3 1.1 0"
+    width="0.03"
+    height="1.6"
+    depth="0.15"
     color="#966238">
-</a-box>-->      -->
-    
+</a-box>  
+
+     <a-box
+    id="paredDerecha2"
+    position="1.3 1.1 1"
+    width="0.03"
+    height="1.6"
+    depth="0.16"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha3"
+    position="1.3 1.1 -1"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>   
+ <a-box
+    id="paredDerecha4"
+    position="1.3 1.1 0.2"
+    width="0.03"
+    height="1.6"
+    depth="0.15"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha5"
+    position="1.3 1.1 0.4"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha6"
+    position="1.3 1.1 0.6"
+    width="0.04"
+    height="1.6"
+    depth="0.15"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha7"
+    position="1.3 1.1 -0.2"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha8"
+    position="1.3 1.1 -0.4"
+    width="0.03"
+    height="1.6"
+    depth="0.15"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha9"
+    position="1.3 1.1 -0.6"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>  
+ <a-box
+    id="paredDerecha10"
+    position="1.3 1.1 -0.1"
+    width="0.03"
+    height="1.6"
+    depth="0.25"
+    color="#966238">
+</a-box>
+  <a-box
+    id="paredDerecha11"
+    position="1.3 1.1 0.8"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>  
   <!-- Troncos laterales -->
    <a-cylinder position="0 0.12 1.3"
     radius="0.18" height="5"
@@ -556,7 +657,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 boton.textContent = '🧹 LIMPIAPARABRISAS: OFF';
                 boton.style.background = '#168B45';
             }
-        });
+                    });
     }
 
     if (escena.hasLoaded) {
