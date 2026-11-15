@@ -175,36 +175,63 @@ AFRAME.registerComponent('rounded-glass', {
 
 <!-- Marco izquierdo -->
 <a-box
-    position="-1.1 1.1 -1.2"
-    width="0.3"
+    position="-1.19 1.1 -1.2"
+    width="0.1"
     height="1.5"
     depth="0.12"
     color="#80512E">
 </a-box>
-
+<a-box
+    position="-1 1 -1.2"
+    width="0.1"
+    height="1.3"
+    depth="0.12"
+    color="#80512E">
+</a-box>
 <!-- Marco derecho -->
 <a-box
-    position="1.1 1.1 -1.2"
-    width="0.3"
+    position="1.19 1.1 -1.2"
+    width="0.1"
     height="1.5"
     depth="0.12"
-    color="#80512E">
+    color="green">
+</a-box>
+<a-box
+    position="1 1 -1.2"
+    width="0.1"
+    height="1.3"
+    depth="0.12"
+    color="green">
 </a-box>
 
+<a-box
+    position="0 0.5 -1.2"
+    width="0.1"
+    height="0.5"
+    depth="0.12"
+    color="red">
+</a-box>
+<a-box
+    position="0 1.8 -1.2"
+    width="0.1"
+    height="0.1"
+    depth="0.12"
+    color="red">
+</a-box>
 <!-- Marco inferior -->
 <a-box
-    position="0 0.6 -1.2"
+    position="0 0.8 -1.2"
     width="1.9"
-    height="0.5"
+    height="0.1"
     depth="0.12"
     color="#80512E">
 </a-box>
 
 <!-- Marco superior -->
 <a-box
-    position="0 1.75 -1.2"
-    width="1.9"
-    height="0.2"
+    position="0 1.69 -1.2"
+    width="2.3"
+    height="0.1"
     depth="0.12"
     color="#80512E">
 </a-box>
@@ -300,7 +327,7 @@ AFRAME.registerComponent('rounded-glass', {
 </a-entity>
 
 <!-- BOTÓN" FÍSICO DENTRO DE LA CABINA -->
-<a-entity id="botonLimpia" class="boton-limpiaparabrisas"
+<!-- <a-entity id="botonLimpia" class="boton-limpiaparabrisas"
     position="0.75 0.65 -0.65"
     rotation="0 0 0">
     <a-cylinder radius="0.13" height="0.08"
@@ -308,7 +335,7 @@ AFRAME.registerComponent('rounded-glass', {
     <a-cylinder position="0 0 -0.055"
         radius="0.09" height="0.04"
         rotation="90 0 0" color="#22CC66"></a-cylinder>
-        </a-entity>
+        </a-entity> -->
    <!--  <a-text value="LIMPIA"
         position="0 0.2 0"
         align="center" color="#FFFFFF"
@@ -390,15 +417,103 @@ AFRAME.registerComponent('rounded-glass', {
     width="0.66" height="1.3" depth="0.06"
     color="#704626"></a-box> -->
 <!-- Pared izquierda -->
-<!-- <a-box
+ <a-box
     id="paredIzquierda"
-    position="-1.2 1.2 0"
-    width="0.12"
-    height="1.5"
-    O="2.5"
+    position="-1.3 1.1 0"
+    width="0.03"
+    height="1.6"
+    depth="0.15"
     color="#966238">
-</a-box> -->
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 1.1"
+    width="0.03"
+    height="1.6"
+    depth="0.16"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 -1.1"
+    width="0.03"
+    height="1.6"
+    depth="0.19"
+    color="#966238">
+</a-box>
 
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 -0.84"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 0.2"
+    width="0.03"
+    height="1.6"
+    depth="0.17"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 0.4"
+    width="0.03"
+    height="1.6"
+    depth="0.23"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 0.6"
+    width="0.03"
+    height="1.6"
+    depth="0.17"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 -0.2"
+    width="0.03"
+    height="1.6"
+    depth="0.16"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 -0.4"
+    width="0.03"
+    height="1.6"
+    depth="0.15"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 -0.6"
+    width="0.03"
+    height="1.6"
+    depth="0.19"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 -0.1"
+    width="0.03"
+    height="1.6"
+    depth="0.15"
+    color="#966238">
+</a-box>
+ <a-box
+    id="paredIzquierda"
+    position="-1.3 1.1 0.85"
+    width="0.03"
+    height="1.6"
+    depth="0.29"
+    color="#966238">
+</a-box>
 <!-- Pared derecha -->
  <a-box
     id="paredDerecha1"
@@ -411,7 +526,7 @@ AFRAME.registerComponent('rounded-glass', {
 
      <a-box
     id="paredDerecha2"
-    position="1.3 1.1 1"
+    position="1.3 1.1 1.1"
     width="0.03"
     height="1.6"
     depth="0.16"
@@ -419,7 +534,15 @@ AFRAME.registerComponent('rounded-glass', {
 </a-box>  
  <a-box
     id="paredDerecha3"
-    position="1.3 1.1 -1"
+    position="1.3 1.1 -1.1"
+    width="0.03"
+    height="1.6"
+    depth="0.2"
+    color="#966238">
+</a-box>   
+ <a-box
+    id="paredDerechatabla"
+    position="1.3 1.1 -0.84"
     width="0.03"
     height="1.6"
     depth="0.2"
@@ -430,7 +553,7 @@ AFRAME.registerComponent('rounded-glass', {
     position="1.3 1.1 0.2"
     width="0.03"
     height="1.6"
-    depth="0.15"
+    depth="0.18"
     color="#966238">
 </a-box>  
  <a-box
@@ -446,7 +569,7 @@ AFRAME.registerComponent('rounded-glass', {
     position="1.3 1.1 0.6"
     width="0.04"
     height="1.6"
-    depth="0.15"
+    depth="0.17"
     color="#966238">
 </a-box>  
  <a-box
@@ -483,10 +606,10 @@ AFRAME.registerComponent('rounded-glass', {
 </a-box>
   <a-box
     id="paredDerecha11"
-    position="1.3 1.1 0.8"
+    position="1.3 1.1 0.85"
     width="0.03"
     height="1.6"
-    depth="0.2"
+    depth="0.28"
     color="#966238">
 </a-box>  
   <!-- Troncos laterales -->
